@@ -29,6 +29,6 @@ pub trait Converter: Send + Sync {
         topic: &str,
         frame_id: &Option<String>,
         entity_path: &str,
-        message: &mut Cursor<Vec<u8>>,
+        buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error>;
 }

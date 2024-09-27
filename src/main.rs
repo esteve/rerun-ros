@@ -54,15 +54,14 @@ fn main() -> Result<(), Error> {
                 let buffer = serialized_message.buffer;
                 let buffer_length = serialized_message.buffer_length;
                 // Wrap data in a CDR buffer
-                let mut cdr_buffer =
-                    Cursor::new(unsafe { slice::from_raw_parts(buffer, buffer_length) }.to_vec());
+                let cdr_buffer = unsafe { slice::from_raw_parts(buffer, buffer_length) }.to_vec();
                 if let Err(e) = converter_registry.process(
                     &rec,
                     &topic_name,
                     &frame_id,
                     &entity_path,
                     &ros_type,
-                    &mut cdr_buffer,
+                    &cdr_buffer,
                 ) {
                     eprintln!("Error processing message: {e}");
                 }

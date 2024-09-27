@@ -23,7 +23,7 @@ impl Converter for Int8Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, i8, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -41,7 +41,7 @@ impl Converter for Int16Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, i16, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -59,7 +59,7 @@ impl Converter for Int32Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, i32, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -77,7 +77,7 @@ impl Converter for Int64Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, i64, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -95,7 +95,7 @@ impl Converter for Float32Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, f32, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -113,7 +113,7 @@ impl Converter for Float64Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, f64, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value))?;
@@ -131,7 +131,7 @@ impl Converter for UInt8Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, u8, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -149,7 +149,7 @@ impl Converter for UInt16Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, u16, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -167,7 +167,7 @@ impl Converter for UInt32Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, u32, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;
@@ -185,7 +185,7 @@ impl Converter for UInt64Converter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let value = cdr::deserialize_from::<_, u64, _>(cdr_buffer, cdr::Infinite)?;
         rec.log(entity_path, &rerun::Scalar::new(value as f64))?;

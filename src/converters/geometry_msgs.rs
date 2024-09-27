@@ -32,7 +32,7 @@ impl Converter for QuaternionConverter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         // TODO(esteve): pass topic and frame_id to rerun
         let cdr_quaternion =
@@ -65,7 +65,7 @@ impl Converter for TransformConverter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let cdr_transform = cdr::deserialize_from::<_, CDRTransform, _>(cdr_buffer, cdr::Infinite)?;
         let translation = rerun::Vec3D::new(
@@ -105,7 +105,7 @@ impl Converter for TransformStampedConverter {
         _topic: &str,
         _frame_id: &Option<String>,
         entity_path: &str,
-        cdr_buffer: &mut Cursor<Vec<u8>>,
+        cdr_buffer: &mut Cursor<&Vec<u8>>,
     ) -> Result<(), Error> {
         let cdr_transform_stamped =
             cdr::deserialize_from::<_, CDRTransformStamped, _>(cdr_buffer, cdr::Infinite)?;

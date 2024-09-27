@@ -16,6 +16,6 @@ entity_path = "foo/bar3"
 
 [[conversion]]
 topic = "topic_stamped"
-ros_type = "geometry_msgs/msg/TransformStamped"
+ros_type = "geometry_msgs/msg/Transform"
 frame_id = "frame5"
 entity_path = "foo/bar3"

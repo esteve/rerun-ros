@@ -5,10 +5,10 @@ mod traits;
 
 use crate::converters::traits::Converter;
 
-use std::collections::HashMap;
 use std::sync::Arc;
+use std::{collections::HashMap, io::Seek};
 
-use std::io::Cursor;
+use std::io::{Cursor, SeekFrom};
 
 use rerun;
 
@@ -80,10 +80,25 @@ impl ConverterRegistry {
         frame_id: &Option<String>,
         entity_path: &str,
         ros_type: &str,
-        message: &mut Cursor<Vec<u8>>,
+        buffer: &Vec<u8>,
     ) -> Result<(), Error> {
+        use crate::converters::std_msgs;
+
+        let mut message = Cursor::new(buffer);
+        let header = cdr::deserialize_from::<_, std_msgs::CDRHeader, _>(message, cdr::Infinite)?;
+        println!("Header: {:?}", header);
+        message.seek(SeekFrom::Start(0))?; // Reset the cursor
+
+        // NOTE: here we can compare the frame_id of the message with the frame_id in the configuration
+        // if they don't match, we can skip the message
+        // if let Some(frame_id) = frame_id {
+        //     if frame_id != cdr_transform_stamped.frame_id {
+        //         return Ok(());
+        //     }
+        // }
+
         let converter = self.get(ros_type).unwrap();
-        converter.convert(rec, topic, frame_id, entity_path, message)?;
+        converter.convert(rec, topic, frame_id, entity_path, &mut message)?;
         Ok(())
     }
 
